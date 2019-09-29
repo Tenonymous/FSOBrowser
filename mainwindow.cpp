@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include <string>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -13,3 +13,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+
+    if (event->key() == Qt::Key_Enter) {
+        auto address = ui->addressBox->itemData(ui->addressBox->currentIndex()).toString();
+        ui -> label ->setText(address);
+    }
+}
