@@ -1,6 +1,6 @@
 #include <QtTest/QTest>
 
-#include "../stringprocessor.h"
+#include "../addressprocessor.h"
 #include ".//engine.h"
 
 class FSOBrowserTest : public QObject
@@ -21,10 +21,10 @@ private slots:
 
 void FSOBrowserTest::areSpacesTest()
 {
-    auto process = StringProcessor("www .blabla.pl");
-    auto process2 = StringProcessor("blabla.pl");
-    auto process3 = StringProcessor("blabla faf .pl");
-    auto process4 = StringProcessor("blablabla.pl ");
+    auto process = AddressProcessor("www .blabla.pl");
+    auto process2 = AddressProcessor("blabla.pl");
+    auto process3 = AddressProcessor("blabla faf .pl");
+    auto process4 = AddressProcessor("blablabla.pl ");
     QVERIFY(process.areSpaces() == true);
     QVERIFY(process2.areSpaces() == false);
     QVERIFY(process3.areSpaces() == true);
@@ -33,9 +33,9 @@ void FSOBrowserTest::areSpacesTest()
 
 void FSOBrowserTest::removeSpacesTest()
 {
-    auto process = StringProcessor("www .blabla.pl");
-    auto process2 = StringProcessor("blabla faf .pl");
-    auto process3 = StringProcessor("blablabla.pl ");
+    auto process = AddressProcessor("www .blabla.pl");
+    auto process2 = AddressProcessor("blabla faf .pl");
+    auto process3 = AddressProcessor("blablabla.pl ");
     QVERIFY(process.removeSpaces() == "www.blabla.pl");
     QVERIFY(process2.removeSpaces() == "blablafaf.pl");
     QVERIFY(process3.removeSpaces() == "blablabla.pl");
@@ -43,28 +43,28 @@ void FSOBrowserTest::removeSpacesTest()
 
 void FSOBrowserTest::checkHTTPprefixTest()
 {
-    auto process = StringProcessor("www .blabla.pl");
-    auto process2 = StringProcessor("http://www.blabla.pl");
-    auto process3 = StringProcessor("http:/www.pl");
-    auto process4 = StringProcessor("http:www.pl");
-    auto process5 = StringProcessor("httpwww.pl");
-    auto process6 = StringProcessor("www.pl/http://");
-    auto process7 = StringProcessor("whttp://www.pl");
-    QVERIFY(process.HTTPprefixExist() == false);
-    QVERIFY(process2.HTTPprefixExist() == true);
-    QVERIFY(process3.HTTPprefixExist() == false);
-    QVERIFY(process4.HTTPprefixExist() == false);
-    QVERIFY(process5.HTTPprefixExist() == false);
-    QVERIFY(process6.HTTPprefixExist() == false);
-    QVERIFY(process7.HTTPprefixExist() == false);
+    auto process = AddressProcessor("www .blabla.pl");
+    auto process2 = AddressProcessor("http://www.blabla.pl");
+    auto process3 = AddressProcessor("http:/www.pl");
+    auto process4 = AddressProcessor("http:www.pl");
+    auto process5 = AddressProcessor("httpwww.pl");
+    auto process6 = AddressProcessor("www.pl/http://");
+    auto process7 = AddressProcessor("whttp://www.pl");
+    QVERIFY(process.isHTTPprefix() == false);
+    QVERIFY(process2.isHTTPprefix() == true);
+    QVERIFY(process3.isHTTPprefix() == false);
+    QVERIFY(process4.isHTTPprefix() == false);
+    QVERIFY(process5.isHTTPprefix() == false);
+    QVERIFY(process6.isHTTPprefix() == false);
+    QVERIFY(process7.isHTTPprefix() == false);
 }
 
 void FSOBrowserTest::getAddressWithHTTPprefixTest()
 {
-    auto process = StringProcessor("www.blabla.pl");
-    auto process2 = StringProcessor("http://www.blabla.pl");
-    auto process3 = StringProcessor("www.pl/http://");
-    auto process4 = StringProcessor("whttp://www.pl");
+    auto process = AddressProcessor("www.blabla.pl");
+    auto process2 = AddressProcessor("http://www.blabla.pl");
+    auto process3 = AddressProcessor("www.pl/http://");
+    auto process4 = AddressProcessor("whttp://www.pl");
 
     QVERIFY(process.getAddressWithHTTPprefix() == "http://www.blabla.pl");
     QVERIFY(process2.getAddressWithHTTPprefix() == "http://www.blabla.pl");

@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QKeyEvent>
-#include <QComboBox>
+#include "engine.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -20,6 +20,6 @@ protected:
 
 private:
     Ui::MainWindow *ui;
-    QComboBox *adressBox;
+    Engine engine;
 };
 #endif // MAINWINDOW_H

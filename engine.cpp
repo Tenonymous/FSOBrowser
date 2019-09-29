@@ -1,5 +1,5 @@
 #include "engine.h"
-#include "stringprocessor.h"
+#include "addressprocessor.h"
 Engine::Engine()
 {
 
@@ -7,8 +7,8 @@ Engine::Engine()
 
 std::string Engine::processAddress(const std::string & rawAddress)
 {
-    return StringProcessor
-           (StringProcessor(rawAddress).removeSpaces())
+    return AddressProcessor
+           (AddressProcessor(rawAddress).removeSpaces())
                                        .getAddressWithHTTPprefix();
 }
 

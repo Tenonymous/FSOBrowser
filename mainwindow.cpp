@@ -14,10 +14,9 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
-{
-
-    if (event->key() == Qt::Key_Enter) {
-        auto address = ui->addressBox->itemData(ui->addressBox->currentIndex()).toString();
-        ui -> label ->setText(address);
+{   
+    if (event->key() == Qt::Key_Enter || event -> key() == Qt::Key_Return) {
+        auto address = ui->addressBox -> currentText();
+        auto regularAddress = engine.processAddress(address.toStdString());
     }
 }
