@@ -5,6 +5,7 @@
 #include <QKeyEvent>
 #include "engine.h"
 #include <QWebEngineView>
+#include <QScopedPointer>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -21,7 +22,7 @@ protected:
 
 private:
     Ui::MainWindow *ui;
-    QWebEngineView *webView;
+    QScopedPointer<QWebEngineView> webView;
     Engine engine;
 };
 #endif // MAINWINDOW_H
