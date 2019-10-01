@@ -5,35 +5,37 @@ AddressProcessor::AddressProcessor()
 
 }
 
-bool AddressProcessor::areSpaces()
+bool AddressProcessor::areSpaces() const
 {
-    return address.find(' ') != std::string::npos;
+    return _address.find(' ') != std::string::npos;
 }
-std::string AddressProcessor::removeSpacesOnOneString(std::string& rawaddress)
+std::string AddressProcessor::removeSpacesOnOneString()
 {
-    rawaddress.erase(std::remove_if(rawaddress.begin(), rawaddress.end(),
-                                    [](auto sign){return std::isspace(sign);}), rawaddress.end());
-    return  rawaddress;
+    std::string addressWithoutSpaces{};
+    std::copy_if(_address.begin(),
+                 _address.end(),
+                 std::back_inserter(addressWithoutSpaces),
+                 [](auto sign){return !std::isspace(sign);});
+    return addressWithoutSpaces;
 }
-std::string AddressProcessor::removeSpaces()
+AddressProcessor AddressProcessor::removeSpaces()
 {
-    auto copyOfAddress = address;
-    return areSpaces() ? removeSpacesOnOneString(copyOfAddress) : address;
+    return areSpaces() ?
+                AddressProcessor(removeSpacesOnOneString()) :
+                AddressProcessor(_address);
 }
 
-bool AddressProcessor::isHTTPprefix()
+bool AddressProcessor::isHTTPprefix() const
 {
-    return address.find("http://", 0, 7) == 0;
+    return _address.find("http://", 0, 7) == 0;
 }
 
-std::string AddressProcessor::addHTTPPrefix(std::string & nonHTTPAddress)
-{
-    nonHTTPAddress.insert(0, "http://");
-    return nonHTTPAddress;
+std::string AddressProcessor::addHTTPPrefix()
+{  
+    return "http://" + _address;
 }
 
 std::string AddressProcessor::getAddressWithHTTPprefix()
 {
-    auto copyOfAddress = address;
-    return isHTTPprefix() ? address : addHTTPPrefix(copyOfAddress);
+    return isHTTPprefix() ? _address : addHTTPPrefix();
 }

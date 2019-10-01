@@ -4,17 +4,20 @@
 class AddressProcessor
 {
 private:
-    std::string address;
+    std::string _address;
 
-    std::string removeSpacesOnOneString(std::string&);
-    std::string addHTTPPrefix(std::string&);
+    bool areSpaces() const;
+    std::string removeSpacesOnOneString();
+
+    bool isHTTPprefix() const;
+    std::string addHTTPPrefix();
 public:
     AddressProcessor();
-    AddressProcessor(const std::string& _address) : address(_address){}
-    bool areSpaces();
-    std::string removeSpaces();
-    bool isHTTPprefix();
+    AddressProcessor(const std::string& _address) : _address(_address){}
+    AddressProcessor removeSpaces();
     std::string getAddressWithHTTPprefix();
+
+    std::string address() const { return _address;}
 
 
 };

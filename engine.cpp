@@ -7,8 +7,7 @@ Engine::Engine()
 
 std::string Engine::processAddress(const std::string & rawAddress)
 {
-    return AddressProcessor
-           (AddressProcessor(rawAddress).removeSpaces())
+    return AddressProcessor(rawAddress).removeSpaces()
                                        .getAddressWithHTTPprefix();
 }
 

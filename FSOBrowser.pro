@@ -1,6 +1,8 @@
 QT       += core gui
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+QT += webenginewidgets
 CONFIG += c++17
 
 # The following define makes your compiler emit warnings if you use
@@ -16,12 +18,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     addressprocessor.cpp \
+    dataprocessor.cpp \
     engine.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     addressprocessor.h \
+    dataprocessor.h \
     engine.h \
     mainwindow.h
 
