@@ -7,6 +7,7 @@
 #include <QWebEngineView>
 #include <QScopedPointer>
 #include "dataprocessor.h"
+#include <QStandardPaths>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -23,12 +24,19 @@ protected:
     void closeEvent(QCloseEvent *event);
 
 private:
+    const std::string pathToHistoryFile = QStandardPaths::writableLocation(QStandardPaths::CacheLocation).toStdString() + "/history";
+    const std::string pathToSettingsFile = QStandardPaths::writableLocation(QStandardPaths::CacheLocation).toStdString() + "/settings";
     Ui::MainWindow *ui;
     QScopedPointer<QWebEngineView> webView;
     Engine engine;
     DataProcessor dataProcessor;
     std::vector<Address> items;
 
+    QString formatAddressToShow(const std::string&) const;
     void loadFromFile();
+    void removeDuplicates();
+
+signals:
+    void enterPressed();
 };
 #endif // MAINWINDOW_H

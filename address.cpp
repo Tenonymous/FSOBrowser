@@ -8,14 +8,16 @@ Address::Address()
 Address::Address(const std::string& address)
 {
     _address = address;
-    _https_mode = _address.find("https") != std::string::npos;
+    _https_mode = _address.find("https://") != std::string::npos
+                  && _address.find("https://") == 0;
 }
 
 
 Address& Address::operator=(const std::string& straddr)
 {
     this->_address = straddr;
-    this->_https_mode = straddr.find("https") != std::string::npos;
+    this->_https_mode = _address.find("https") != std::string::npos
+                        && _address.find("https://") == 0;
     return *this;
 }
 
@@ -47,5 +49,11 @@ std::string Address::getAddressWithoutPrefix() const
     return _address.find("www") != std::string::npos
                 ? _address.substr(getPrefix().size() + 1)
                 : _address.substr(getPrefix().size());
+}
+
+bool Address::isIncorrect() const
+{
+    return _address.find('.') == std::string::npos
+           && _address.size() < minimumAddressLength;
 }
 
