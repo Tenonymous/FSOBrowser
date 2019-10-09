@@ -7,6 +7,7 @@ class Engine
 public:
     Engine();
     std::string processAddress(const std::string&);
+private:
 
 
 };

@@ -1,23 +1,24 @@
 #ifndef ADDRESSPROCESSOR_H
 #define ADDRESSPROCESSOR_H
-#include "string"
+#include "address.h"
+
 class AddressProcessor
 {
 private:
-    std::string _address;
+    Address _address;
 
     bool areSpaces() const;
     std::string removeSpacesOnOneString();
 
     bool isHTTPprefix() const;
-    std::string addHTTPPrefix();
+    Address addHTTPPrefix();
 public:
     AddressProcessor();
     AddressProcessor(const std::string& _address) : _address(_address){}
     AddressProcessor removeSpaces();
-    std::string getAddressWithHTTPprefix();
+    Address getAddressWithHTTPprefix();
 
-    std::string address() const { return _address;}
+    Address address() const { return _address;}
 
 
 };
