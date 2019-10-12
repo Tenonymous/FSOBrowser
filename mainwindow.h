@@ -32,8 +32,12 @@ private:
     DataProcessor dataProcessor;
     std::vector<Address> items;
 
+    std::string currentAddress() const;
+
     QString formatAddressToShow(const std::string&) const;
     void loadFromFile();
+    std::vector<Address> copyItemsToVector();
+    void addItemsToBoxWithoutCurrent(const std::vector<Address>&, const std::string& current);
     void removeDuplicates();
 
 signals:
